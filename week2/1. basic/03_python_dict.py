@@ -42,13 +42,13 @@ def find_above_average_students(students):
         tuple: (평균 점수, 평균 이상 학생 이름 리스트)
     """
     # TODO: 모든 학생의 점수를 리스트로 추출하세요
-    pass
+    student = [student["score"] for student in students]
     
     # TODO: 평균 점수를 계산하세요
-    pass
+    average = sum(student) / len(students)
     
     # TODO: 평균 이상인 학생들의 이름을 리스트로 추출하세요
-    pass
+    above_average_students = [result["name"] for result in students if result["score"] >= average]
     
     return average, above_average_students
 
