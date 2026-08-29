@@ -6,7 +6,7 @@
 임의의 N 으로 일반화한 고전 퍼즐입니다. 저작권이 만료된 퍼블릭 도메인 문제이며,
 본 지문과 테스트 케이스는 이 학습 자료를 위해 자체적으로 작성되었습니다.
 
-▣ 상황 설명
+▣ 상황 설명 
 N x N 크기의 정사각형 체스판이 주어집니다.
 체스의 퀸(Queen) 은 같은 행, 같은 열, 그리고 두 대각선 방향으로
 임의의 칸 만큼 이동/공격할 수 있는 강력한 기물입니다.
@@ -68,8 +68,36 @@ def n_queens(n: int) -> int:
     #       ...
     #   place(0)
     #   return count
-    pass
+    
+    cols = [0] * n
+    count = 0
+    row = 0
+    def place(row):
+      nonlocal count
+      if row == n:
+          count += 1
+          return
 
+      for col in range(0,n):
+        safe = True
+
+        for i in range(0,row):
+          if cols[i] == col:
+              safe = False
+              continue
+          if abs(cols[i] - col) == row - i:
+              safe = False
+              continue
+        if safe:
+          cols[row] = col
+          place(row+1)
+
+          
+
+    
+    place(row)
+
+    return count
 
 if __name__ == "__main__":
     print("[테스트] N=1 ~ N=8 에 대한 가능한 배치의 수")
