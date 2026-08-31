@@ -40,7 +40,8 @@ def gcd(a, b):
     if b == 0:
         return a
     
-    gcd(b, a%b)
+    return gcd(b, a%b)
+
 
 def gcd_iterative(a, b):
     """
@@ -54,7 +55,10 @@ def gcd_iterative(a, b):
     """
     # TODO: 반복문으로 구현
     # b가 0이 될 때까지 반복
-    return gcd(a,b)
+    while(b != 0):
+        a, b = b, a%b
+
+    return a
 
 def lcm(a, b):
     """
@@ -67,7 +71,8 @@ def lcm(a, b):
         최소공배수
     """
     # TODO: LCM 계산
-    return a * b / gcd(a,b)
+    result = gcd(a,b)
+    return a * b // result
 
 def extended_gcd(a, b):
     """
@@ -87,9 +92,14 @@ def extended_gcd(a, b):
     if b == 0:
         return (a, 1, 0)
 
-    result = gcd(a,b)
+    g, x1, y1 = extended_gcd(b, a%b)
 
+    x1, y1 = y1, x1 - a//b * y1
+
+    return (g, x1, y1)
     
+
+
 
 
     
@@ -108,7 +118,13 @@ def is_prime(n):
     # n이 2보다 작으면 False
     # 2부터 sqrt(n)까지 나누어 떨어지는지 확인    
     # 3부터 sqrt(n)까지 홀수만 확인
-    for i in range(n, int(n**0.5)-1, -1):
+    if n < 2:
+        return False
+    if n== 2:
+        return True
+    if n%2 == 0:
+        return False
+    for i in range(3, int(n**0.5)-1, 2):
         if(n % i == 0):
             return False
         
