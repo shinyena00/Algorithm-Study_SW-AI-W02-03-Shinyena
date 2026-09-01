@@ -1,0 +1,36 @@
+from typing import List
+
+
+class Solution:
+    def candy(self, ratings: List[int]) -> int:
+        n = len(ratings)
+        temp = []
+
+        for i in range(n):
+            temp.append((ratings[i], i))
+
+        temp.sort()
+
+        result = [1] * n
+
+        for comp in temp:
+            current = comp[1]
+            update = 0
+
+            if current > 0:
+                if ratings[current - 1] < comp[0]:
+                    update = result[current - 1]
+
+            elif current < n - 1:
+                if ratings[current + 1] < comp[0]:
+                    if update < result[current + 1]:
+                        update = result[current + 1]
+
+            result[current] = update + 1
+        print(result)
+        return sum(result)
+
+
+sol = Solution()
+
+print(sol.candy([1,3,2,2,1]))  # expected: 5

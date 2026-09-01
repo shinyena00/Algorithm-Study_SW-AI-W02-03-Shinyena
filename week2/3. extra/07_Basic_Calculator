@@ -1,0 +1,63 @@
+class Solution:
+    def calculate(self, s: str) -> int:
+        stack = []
+        s = s.replace(" ", "")
+
+        for word in s:
+            if not stack:
+                stack.append(word)
+
+            if word in "(+-":
+                stack.append(word)
+
+            elif word == ")":
+                target = stack.pop()
+                stack.pop()
+
+                if stack and stack[-1] == "(":
+                    calc = stack.pop()
+
+                    if not stack:
+                        stack.append(target)
+                        continue
+
+                calc = stack.pop()
+                prior = stack.pop()
+
+                if calc == "+":
+                    stack.append(int(prior) + int(target))
+
+                elif calc == "-":
+                    stack.append(int(prior) - int(target))
+
+            else:
+                if stack[-1] in "()":
+                    stack.append(word)
+
+                else:
+                    calc = stack.pop()
+                    prior = stack.pop()
+
+                    if calc == "+":
+                        stack.append(int(prior) + int(word))
+
+                    elif calc == "-":
+                        stack.append(int(prior) - int(word))
+
+        return stack.pop()
+
+
+solution = Solution()
+
+tests = [
+    "1 + 1",
+    "2-1 + 2",
+    "(1+1)",
+    "(1+(4+5+2)-3)+(6+8)"
+]
+
+for s in tests:
+    try:
+        print(f"{s} -> {solution.calculate(s)}")
+    except Exception as e:
+        print(f"{s} -> ERROR: {type(e).__name__}: {e}")
