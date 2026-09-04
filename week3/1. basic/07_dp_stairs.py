@@ -12,7 +12,7 @@
 출력:
 - n번째 계단까지 오르는 방법의 수
 
-예제:
+예제: 
 입력: n = 4
 출력: 5
 설명: 
@@ -33,7 +33,7 @@ DP 문제 풀이 순서:
 3. 초기값 설정: dp[0], dp[1] 등
 4. 계산 순서 결정: 상향식 or 하향식
 5. 구현 및 검증
-"""
+"""                                                         
 
 def climb_stairs(n):
     """
@@ -46,15 +46,18 @@ def climb_stairs(n):
         n번째 계단까지 오르는 방법의 수
     """
     # TODO: 특별한 경우 처리
-    pass
+
     
     
     # TODO: dp 배열 생성 및 초기화
-    pass
+    dp = [0 , 1, 2]
     
     # TODO: 작은 문제부터 차례로 계산
-    pass
-    
+    current = len(dp) - 1
+
+    for turn in range(current, n+1):
+        dp.append(dp[turn] + dp[turn - 1])
+
     return dp[n]
 
 # 테스트 케이스
