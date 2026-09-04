@@ -50,15 +50,19 @@ def climb_stairs(n):
     
     
     # TODO: dp 배열 생성 및 초기화
-    dp = [0 , 1, 2]
+    if n == 0 or n== 1:
+        return 1
+
+    prev1 = 1
+    prev2 = 1
+
+    for i in range(2, n+1):
+        current = prev1 + prev2
+        prev1, prev2 = current, prev1
     
-    # TODO: 작은 문제부터 차례로 계산
-    current = len(dp) - 1
 
-    for turn in range(current, n+1):
-        dp.append(dp[turn] + dp[turn - 1])
 
-    return dp[n]
+    return current
 
 # 테스트 케이스
 if __name__ == "__main__":
