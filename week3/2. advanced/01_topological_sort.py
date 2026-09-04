@@ -59,24 +59,23 @@ def topological_sort(vertices, edges):
     queue = deque()
 
 
-    while(True):
-        for vertex, num in in_out.items():
-            if num == 0:
-                result.append(vertex)
-                queue.append(vertex)
-                in_out[vertex] -= 1
+    for vertex, num in in_out.items():
+        if num == 0:
+            queue.append(vertex)
+            in_out[vertex] -= 1
 
     
     # TODO: 큐가 빌 때까지 반복
     ## 큐에서 정점 꺼내기
     ## 인접한 정점들의 진입 차수 감소
-        while(queue):
-            current = queue.popleft()
-            for j in graph[current]:
-                in_out[j] -= 1
+    while(queue):
+        current = queue.popleft()
+        result.append(current)
+        for j in graph[current]:
+            in_out[j] -= 1
+            if(in_out[j] == 0):
+                queue.append(j)
 
-        if sum(in_out.values()) == -1 * vertices:
-            break
 
         
 
