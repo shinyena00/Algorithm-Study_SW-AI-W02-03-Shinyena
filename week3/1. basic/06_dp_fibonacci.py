@@ -83,16 +83,10 @@ def fibonacci_memo(n, memo=None):
     """
     # TODO: memo가 None이면 빈 딕셔너리로 초기화
     if memo == None:
-        memo = {}
+        memo = {0 : 0, 1:1}
     
     # TODO: base case 
-    if n == 0:
-        memo[n] = 0
-        return 0
 
-    if n == 1:
-        memo = 1
-        return 1
     
     # TODO: 이미 계산한 값이 memo에 있으면 반환
     if n in memo:
@@ -104,11 +98,7 @@ def fibonacci_memo(n, memo=None):
         n1 = fibonacci_memo(n-1,memo)
     else:
         n1 = memo[n-1]
-
-    if n-2 not in memo:
-        n2 = fibonacci_memo(n-2, memo)
-    else:
-        n2 = memo[n-2]
+    n2 = memo[n-2]
 
     memo[n] = n1 + n2
 
