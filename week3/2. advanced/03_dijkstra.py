@@ -90,17 +90,17 @@ def dijkstra(n: int, edges: list, start: int) -> list:
     # TODO: 우선순위 큐(heapq)로 BFS-like 최단경로 탐색
     heap = []
     
-    heapq.heappush(heap, start)
+    heapq.heappush(heap, (0, start))
 
     while(heap):
-        node = heapq.heappop(heap)
-        for way in graph[node]:
-            heapq.heappush(heap, way[0])
-            if dist[way[0]] == INF or dist[way[0]] > dist[node] + way[1]:
-                dist[way[0]] = dist[node] + way[1]
-
-
-
+        d, v = heapq.heappop(heap)
+        if d > dist[v]:
+            continue
+        for vertex, w in graph[v]:
+            if dist[vertex] > d + w:
+                dist[vertex] = d+w
+                heapq.heappush(heap, (d+w, vertex))
+            
 
     
     
