@@ -45,7 +45,7 @@ dijkstra(n: int, edges: list[tuple[int, int, int]], start: int) -> list
         도달 불가능하면 float('inf').
   - dist[start] 는 항상 0 이어야 합니다.
 
-▣ 제약
+▣ 제약 
 - 0 <= n <= 1000, 간선 수 <= 5000 정도면 충분.
 - 0 <= w <= 10000
 
